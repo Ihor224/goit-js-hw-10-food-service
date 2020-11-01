@@ -20,7 +20,6 @@ const body = document.querySelector("body");
 const switchTheme = document.querySelector(".theme-switch__toggle");
 
 switchTheme.addEventListener("change", clickOnSwitch);
-switchTheme.addEventListener("change", setLocalStorage);
 document.addEventListener("DOMContentLoaded", themeFromLocalStorage);
 
 function clickOnSwitch() {
@@ -34,20 +33,15 @@ function clickOnSwitch() {
 function setDarkTheme() {
   body.classList.add(Theme.DARK);
   body.classList.remove(Theme.LIGHT);
+  if (switchTheme.checked) {
+    localStorage.setItem("theme", Theme.DARK);
+  }
 }
 
 function setLightTheme() {
   body.classList.add(Theme.LIGHT);
   body.classList.remove(Theme.DARK);
-}
-
-function setLocalStorage() {
-  if (switchTheme.checked) {
-    localStorage.setItem("theme", Theme.DARK);
-  } else {
-    localStorage.removeItem("theme");
-    localStorage.setItem("theme", Theme.LIGHT);
-  }
+  localStorage.setItem("theme", Theme.LIGHT);
 }
 
 function themeFromLocalStorage() {
